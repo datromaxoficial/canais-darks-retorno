@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/TMaTruTsinose7S3iPDUYdu4oZUCJZ0yCEvD8VhwAk='; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Canais Darks · voltando</title>
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0a0e15;color:#edf1f7;font:15px/1.5 system-ui,"Segoe UI",sans-serif;padding:16px;box-sizing:border-box;text-align:center}</style>
+</head>
+<body>
+<p id="msg">Voltando ao Canais Darks no seu computador…</p>
+<noscript><p>Ative o JavaScript para concluir a conexão.</p></noscript>
+<script>(function () {
+  var q = new URLSearchParams(location.search);
+  // tira o código da barra e do histórico antes de qualquer coisa
+  history.replaceState(null, '', location.pathname);
+  var ok = /^[0-9a-f]{48}$/.test(q.get('state') || '');
+  var destino = new URL('http://localhost:4747/instagram/retorno');
+  ['code', 'state', 'error', 'error_reason', 'error_description'].forEach(function (k) {
+    var v = q.get(k);
+    if (v !== null && v.length <= 2048) destino.searchParams.set(k, v);
+  });
+  if (!ok) { document.getElementById('msg').textContent = 'Pedido de conexão inválido. Volte ao Canais Darks e clique em "Conectar Instagram" de novo.'; return; }
+  location.replace(destino.toString());
+})();
+</script>
+</body>
+</html>
